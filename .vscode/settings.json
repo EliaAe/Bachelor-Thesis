@@ -1,0 +1,31 @@
+{
+    // Define LaTeX tools including lualatex
+    "latex-workshop.latex.tools": [
+      {
+        "name": "lualatex",
+        "command": "lualatex",
+        "args": [
+          "-synctex=1",
+          "-interaction=nonstopmode",
+          "%DOC%"
+        ]
+      }
+    ],
+  
+    // Set the default recipe to lualatex
+    "latex-workshop.latex.recipes": [
+      {
+        "name": "lualatex",
+        "tools": [
+          "lualatex"
+        ]
+      }
+    ],
+  
+    // Set lualatex as the default build recipe
+    "latex-workshop.latex.recipe.default": "lualatex",
+  
+    // Automatically build the project using lualatex on save (optional)
+    "latex-workshop.latex.autoBuild.run": "onSave"
+  }
+  
