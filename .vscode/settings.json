@@ -21,7 +21,9 @@
         ]
       }
     ],
-  
+    
+    "editor.wordWrap":"on",
+
     // Set lualatex as the default build recipe
     "latex-workshop.latex.recipe.default": "lualatex",
   
