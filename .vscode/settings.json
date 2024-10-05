@@ -24,10 +24,8 @@
     
     "editor.wordWrap":"on",
 
-    // Set lualatex as the default build recipe
     "latex-workshop.latex.recipe.default": "lualatex",
-  
-    // Automatically build the project using lualatex on save (optional)
-    "latex-workshop.latex.autoBuild.run": "onSave"
+    "latex-workshop.latex.autoBuild.run": "onFileChange",
+    "latex-workshop.latex.autoBuild.cleanAndRetry.enabled": true
   }
   

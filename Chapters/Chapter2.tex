@@ -1,5 +1,31 @@
 \chapter{Literature Review}\label{chapter:literature_review}
-\section{Traditional weather insurance process}\label{section:traditional_weather_insurance_process}
+
+This chapter dives deeper into the existing challenges and limitations of the current weather insurance models with a focus on weather-based index insurance. It then introduces the concept of using smart contracts in insurance in combination with chainlink oracles and google cloud public datasets. Finally, the chapter examines regulatory and technical challenges associated with implementing a blockchain-based weather solution. 
+
+\section{Key limitations in existing weather insurance}\label{section:key_limitations_existing_insurance}
+
+In this section every key limitation of existing weather insurance will have its own dedicated subsection.
+
+\subsection{Administrative costs}
+
+In Traditional crop insurance the administrative costs make up 35\% to 40\% of the insurance outlays while the remaining portion goes towards other costs such as the insurance payout and the reinsurance costs \autocite{glauber2004crop}. The majority of these administrative costs consist of loss assessment, monitoring, claims, and underwriting expenses.
+
+In index insurance the administrative costs are significantly lower than in crop insurance because the payouts are based on predefined weather indices rather than assessing individual losses. This index-based insurance model also reduces moral hazards since the payouts are triggered by weather events rather than individual actions. \autocite{kusuma2018viable} proposes a weather-based index insurance for rice in Indonesia. It is desgined to be cost-effective by basing the insured amount on the cost of inputs (e.g. seed and fertilizer) rather than covering the individual revenue loss.
+
+In \cref{section:smart_contracts_insurance} the thesis will discuss how smart contracts can be used to lower administrative costs through automated processes even more than weather-based index insurance.
+
+\subsection{Systemic risk}
+
+A key limitation for existing weather insurance is the systemic risk it poses. \autocite{xu2010systemic} explains how weather risk is systemic in nature, meaning that weather-related events like droughts or floods often affect entire regions rather than isolated areas.In such an event, a large number of insurance holders would file claims simultaneously, making it difficult for the insurance company to payout all these claims at the same time. It further shows that systemic risk is one of the key reasons why existing weather-based insurance markets have struggled and often require government subsidies, especially in the case of crop insurance. 
+
+Based on \autocite{salgueiro2021diversification}, which shows how geographic diversification of the insurance solution reduces the systemic risk, this thesis proposes that a solution based on blockchain technology, which allows for global scalability and diversification, could further reduce systemic risk by creating more decentralized risk pools.
+
+\subsection{Fraud and manipulation}
+
+:(
+
+\subsection{Lack of transparency and trust}
+
 \section{Smart contracts in Insurance}\label{section:smart_contracts_insurance}
 \section{Chainlink and Google Cloud Public Datasets}\label{section:chainlink_google_cloud_datasets}
 \section{Regulatory and technical challenges}\label{section:regulatory_technical_challenges}
