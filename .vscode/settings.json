@@ -7,7 +7,15 @@
         "args": [
           "-synctex=1",
           "-interaction=nonstopmode",
+          "-file-line-error",
           "%DOC%"
+        ]
+      },
+      {
+        "name": "biber",
+        "command": "biber",
+        "args": [
+          "%DOCFILE%"
         ]
       }
     ],
@@ -17,6 +25,9 @@
       {
         "name": "lualatex",
         "tools": [
+          "lualatex",
+          "biber",
+          "lualatex",
           "lualatex"
         ]
       }
