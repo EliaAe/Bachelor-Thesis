@@ -10,7 +10,7 @@ In this section every key limitation of existing weather insurance will have its
 
 In Traditional crop insurance the administrative costs make up 35\% to 40\% of the insurance outlays while the remaining portion goes towards other costs such as the insurance payout and the reinsurance costs \autocite{glauber2004crop}. The majority of these administrative costs consist of loss assessment, monitoring, claims, and underwriting expenses.
 
-In index insurance the administrative costs are significantly lower than in crop insurance because the payouts are based on predefined weather indices rather than assessing individual losses. This index-based insurance model also reduces moral hazards since the payouts are triggered by weather events rather than individual actions. \autocite{kusuma2018viable} proposes a weather-based index insurance for rice in Indonesia. It is desgined to be cost-effective by basing the insured amount on the cost of inputs (e.g. seed and fertilizer) rather than covering the individual revenue loss.
+In index insurance the administrative costs are significantly lower than in crop insurance because the payouts are based on predefined weather indices rather than assessing individual losses. This index-based insurance model also reduces moral hazards since the payouts are triggered by weather events rather than individual actions. \autocite{kusuma2018viable} proposes a weather-based index insurance for rice in Indonesia. It  is desgined to be cost-effective by basing the insured amount on the cost of inputs (e.g. seed and fertilizer) rather than covering the individual revenue loss.
 
 In \cref{section:smart_contracts_insurance} the thesis will discuss how smart contracts can be used to lower administrative costs through automated processes even more than weather-based index insurance.
 
@@ -22,11 +22,21 @@ Based on \autocite{salgueiro2021diversification}, which shows how geographic div
 
 \subsection{Fraud and manipulation}
 
-:(
+
 
 \subsection{Lack of transparency and trust}
 
+
+
 \section{Smart contracts in Insurance}\label{section:smart_contracts_insurance}
+
+\autocite{gatteschi2018blockchain} expresses concerns that the technology is still being explored and not yet ready for its benefits to become more evident. One challenge faced by smart contracts in the insurance industry is technical readiness. Oracles are the external data sources that provide real-world information to smart contracts. The integrity of the smart contract is dependent on the reliability of these oracles and the validity of their data. 
+
+Another important point to consider are the different kinds of legal problems associated with smart contracts. For one there is no accepted universal definition of a smart contract which leads to difficulties in defining their legal status across different jurisdictions. There are also concerns about consumer protection laws since an automated transaction initiated by a smart contract may violate local regulations if consumers are unable to legally contest or reverse it. \autocite{ferreira2021regulating}
+
 \section{Chainlink and Google Cloud Public Datasets}\label{section:chainlink_google_cloud_datasets}
+
+For the prototype this thesis we will use Chainlink, a decentralized oracle service, in order for our smart contract to access real-world weather data. The decentralized nature of Chainlink improves the security and reliability of the data-inputs. \autocite{beniiche2020study}
+
 \section{Regulatory and technical challenges}\label{section:regulatory_technical_challenges}
 
