@@ -30,13 +30,18 @@ Based on \autocite{salgueiro2021diversification}, which shows how geographic div
 
 \section{Smart contracts in Insurance}\label{section:smart_contracts_insurance}
 
-\autocite{gatteschi2018blockchain} expresses concerns that the technology is still being explored and not yet ready for its benefits to become more evident. One challenge faced by smart contracts in the insurance industry is technical readiness. Oracles are the external data sources that provide real-world information to smart contracts. The integrity of the smart contract is dependent on the reliability of these oracles and the validity of their data. 
-
-Another important point to consider are the different kinds of legal problems associated with smart contracts. For one there is no accepted universal definition of a smart contract which leads to difficulties in defining their legal status across different jurisdictions. There are also concerns about consumer protection laws since an automated transaction initiated by a smart contract may violate local regulations if consumers are unable to legally contest or reverse it. \autocite{ferreira2021regulating}
+In 2017 the insurance company AXA launched fizzy, a flight insurance based on smart contract technology. It was one of the earliest examplex of the adaption of blockchain technology in the insurance industry. Fizzy was quite simple. A customer entered his flight details and paid a premium for the insurance. Later Fizzy then used an oracle to check whether the flight has been delayed for more than 2 hours and if so would trigger a payment automatically \autocite{hoffmann2021double}.
 
 \section{Chainlink and Google Cloud Public Datasets}\label{section:chainlink_google_cloud_datasets}
 
-For the prototype this thesis we will use Chainlink, a decentralized oracle service, in order for our smart contract to access real-world weather data. The decentralized nature of Chainlink improves the security and reliability of the data-inputs. \autocite{beniiche2020study}
+For the prototype this thesis will use Chainlink, a decentralized oracle service, in order for our smart contract to access real-world weather data. The decentralized nature of Chainlink improves the security and reliability of the data-inputs \autocite{beniiche2020study}.
 
-\section{Regulatory and technical challenges}\label{section:regulatory_technical_challenges}
+Specifically, Global Surface Summary of the Day (GSOD) wlil be used as the weather data source. Over 9000 station provide weather data for the dataset with each station having to report a minimum of 4 observations per day of a set of measured variables including temperature, wind speed, pressure among others. \autocite{NOAA_GSOD_2023}. The entire dataset is hosted on the Google Cloud Platform (GCP) and is updated daily.
 
+Additionally, the Global Forecast System (GFS) is used which provides weather data prediction globally of up to 16 days. It is a numerical system based on four different models (atmosphere, ocean, land and sea model) and is hosted on the Google Cloud Platform (GCP) alongside Global Surface Summary of the Day (GSOD) \autocite{NOAA_GSOD_nd}.
+
+\section{Technical and regulatory challenges of Smart Contracts}\label{section:regulatory_technical_challenges}
+
+\autocite{gatteschi2018blockchain} expresses concerns that the technology is still being explored and not yet ready for its benefits to become more evident. One challenge faced by smart contracts in the insurance industry is technical readiness. Oracles are the external data sources that provide real-world information to smart contracts. The integrity of the smart contract is dependent on the reliability of these oracles and the validity of their data. 
+
+Another important point to consider are the different kinds of legal problems associated with smart contracts. For one there is no accepted universal definition of a smart contract which leads to difficulties in defining their legal status across different jurisdictions. There are also concerns about consumer protection laws since an automated transaction initiated by a smart contract may violate local regulations if consumers are unable to legally contest or reverse it \autocite{ferreira2021regulating}.
