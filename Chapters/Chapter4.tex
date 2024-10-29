@@ -1,7 +1,4 @@
 \chapter{Development of the Prototype}\label{chapter:development_prototype}
-
-
-
 \section{Requirements}\label{section:requirements}
 
 In order to provide the blockchain-based weather insurance, our system must fulfill several key requirements. In this section we describe each category of requirements in a dedicated subsection.
@@ -15,18 +12,16 @@ In order to provide the blockchain-based weather insurance, our system must fulf
         \item This user interface should be kept with minimum need
     \end{itemize}
 
-
     \item \textbf{Weather Data Integration} 
     \begin{itemize}
-        \item The system must be able to receive global weather data from reliable and trusted external sources such as Global Surface Summary of the Day (GSOD) and Global Forecast System (GFS)
+        \item The system must be able to receive and process global weather data from reliable and trusted external sources such as Global Surface Summary of the Day (GSOD) and Global Forecast System (GFS)
         \item Both historical and forecast data must be available
     \end{itemize}
-    
     
     \item \textbf{Smart Contract}
     \begin{itemize}
         \item The smart contract must allow users to purchase weather-based insurance policies.
-        \item The smart contract must store the policy terms, including the weather conditions that will trigger an insurance payout.
+        \item The smart contract must store the policy terms, including the weather conditions that will trigger the specified amount of insurance payout.
         \item The contract must automatically trigger a payout when the predefined weather conditions are met.
     \end{itemize}
     
@@ -36,11 +31,9 @@ In order to provide the blockchain-based weather insurance, our system must fulf
         \item Chainlink oracles must ensure secure transmission of data to the smart contract.
     \end{itemize}
     
-    
-    
     \item \textbf{Payout Processing}
     \begin{itemize}
-        \item The system must automatically execute payouts without manual intervention when conditions are met.
+        \item The system must be able to automatically execute payouts without manual intervention when the correct conditions are met.
     \end{itemize}
 \end{itemize}
 
@@ -49,13 +42,7 @@ In order to provide the blockchain-based weather insurance, our system must fulf
 \begin{enumerate}
     \item \textbf{Security}
     \begin{itemize}
-        \item All interactions between the smart contract and Chainlink oracle must be secure.
-        \item The system must protect the privacy of policyholder data.
-    \end{itemize}
-    
-    \item \textbf{Reliability}
-    \begin{itemize}
-        \item The system must retrieve weather data consistently from reliable sources.
+        \item All the bilateral interactions between the smart contract, Chainlink oracle, google cloud and the user must be secure and tamper-proof.
     \end{itemize}
     
     \item \textbf{Scalability}
@@ -65,21 +52,16 @@ In order to provide the blockchain-based weather insurance, our system must fulf
     
     \item \textbf{Transparency}
     \begin{itemize}
-        \item All transactions and insurance claims must be recorded on the blockchain for transparency.
-    \end{itemize}
-    
-    \item \textbf{Performance}
-    \begin{itemize}
-        \item The system must respond to data requests and process conditions efficiently.
+        \item All transactions and insurance claims must be recorded on the blockchain for transparency and security.
     \end{itemize}
 \end{enumerate}
 
-\subsection{Technical Requirements}
+\subsection{Technical Requirements (not finished)}
 
 \begin{enumerate}
     \item \textbf{Blockchain Platform}
     \begin{itemize}
-        \item The system must be deployed on the Ethereum blockchain, supporting smart contracts in Solidity.
+        \item The smart contract must be deployed on the Ethereum blockchain
     \end{itemize}
     
     \item \textbf{Data API}
@@ -93,16 +75,40 @@ In order to provide the blockchain-based weather insurance, our system must fulf
     \end{itemize}
 \end{enumerate}
 
-\section{Inclusion of Chainlink and Google Cloud Public Datasets}\label{section:inclusion_chainlink_google_cloud_datasets}
-\section{Designing the architecture and the data flow}\label{section:designing_architecture_data_flow}
+\section{Architecture}
 
-\subsection{Architecture}
+In this section we will propose the architecture for our blockchain-based weather insurance system. First we present a high-level overview of the system and then elaborate on the most important components in a dedicated subsection for each component.
 
-In \ref{fig:architecture} we present an overview of the general architecture that implements the requirements specified in \ref{section:requirements}. 
+\subsection{General overview}
+
+In \ref{fig:generalArchitecture} we present an overview of the general architecture that implements the requirements specified in \ref{section:requirements}. The center of the architecture is the smart contract deployed on the Ethereum blockchain. It manages all policies and decisions based on user requests and incoming weather data. The end user interacts directly with the smart contract through a decentralized app (see \ref{subsection:decentralizedApp}) where they can request insurance policies and track their contract status. 
+
+The weather data is provided by Global Surface Summary of the Day (GSOD) and Global Forecast System (GFS) respectively. These datasets can be accessed via GCP BigQuery and GCP Storage through the GCP Interface. To bridge the gap between the off-chain data from GCP and the on-chain smart contract, the system uses a Chainlink Oracle (see \ref{subsection:ChainlinkOracle}). This Chainlink Oracle retrieves the weather data from GCP through the GCP Interface which are essentially API Endpoints and passes it on to the smart contract on the Ethereum blockchain.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/architecture-overview.drawio.pdf}
-    \caption{Diagram showing the architecture of the smart contract}
-    \label{fig:architecture}
+    \caption{Diagram showing the architecture of the smart contract. \textit{Source: Author's own representation.}}
+    \label{fig:generalArchitecture}
 \end{figure}
+
+\subsection{Decentralized app}\label{subsection:decentralizedApp}
+
+The decentralized application (DApp) allows a non-technical user to directly interact with the blockchain. Through its interface a user can request insurance policies, check policy statuses and receive notifications. Unlike traditional applications, which interact with a centrally managed backend, decentralized applications interact directly with a smart contract on a blockchain.
+
+This interaction requires a digital wallet (e.g. MetaMask) which enables the user to initiate and sign a transaction when making a request, such as purchasing an insurance policy. In our architecture, the DApp serves as the primary interface in order for the end-users to interact with the system. 
+
+(Idea: Include a mockup of a frontend utilizing metamask)
+
+\subsection{Integration of chainlink oracles and GCP}\label{subsection:ChainlinkOracle}
+
+Since the weater data from GSOD and GFS, which is accessed through the Google Cloud Platform (GCP), is not directly available from the on-chain environment of the smart contract we need to leverage oracles, which retreive and verify external data before delivering it to the blockchain.
+
+In this case, Chainlink oracles are used to securely interact with the Google Cloud Platform (GCP) and pass it to the smart contract. The Chainlink oracle network consists of globally distributed nodes. When a request is triggered, multiple nodes independently access GCP and receive the weather data specified in the request. If any nodes return results that differ from the majority, they are flagged as potentially malicious. This decentralized approach ensures that only verified and reliable weather data is passed on to the smart contract.
+
+
+\section{Data flow}
+
+\subsection{General Flow}
+\subsection{Interaction with smart contract}
+\subsection{Smart contract fetching weather data}
