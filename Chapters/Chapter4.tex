@@ -109,6 +109,29 @@ In this case, Chainlink oracles are used to securely interact with the Google Cl
 
 \section{Data flow}
 
-\subsection{General Flow}
+In this section we will present the most important data flows in our system.
+
+\subsection{Purchase weather insurance policy}
+
+The flow diagram in \cref{fig:purchasePolicyFlow} outlines the steps involved in purchasing a weather insurance policy in out system. The main components involved are the End User, Smart Contract, Chainlink Oracle and the Google Cloud Platform (GCP). Each of these components play a central role in enabling the policy purchase and the associated data retrieval and validation processes. Every request between components includes a set of parameters. These parameters contain the necessary information that each component needs in order to perform its role and functions accurately. For example, in a purchase policy request parameters such as location, coverage duration and type of coverage are sent to the smart contract. Table \cref contains all requests with their respective parameters.
+
+The End User starts the process by requesting a weather insurance policy from the smart contract. This interaction happens through the use of a decentralized app \cref{subsection:decentralizedApp}, which is not explicitly mentioned in the diagram but can be thought of as the interface enabling the end user to interact directly with the smart contract. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/flow-purchase-policy.drawio.pdf}
+    \caption{Purchase policy flow \textit{Source: Author's own representation.}}
+    \label{fig:purchasePolicyFlow}
+\end{figure}
+
+\begin{table}[h]
+    \centering
+    \input{tables/requests.tex}
+    \caption{Requests with their parameters \textit{Source: Author's own representation.}}
+    \label{tab:flowRequests}
+\end{table}
+
+\subsection{Invoke policy payment}
+
 \subsection{Interaction with smart contract}
 \subsection{Smart contract fetching weather data}
