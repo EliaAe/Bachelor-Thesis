@@ -1,12 +1,12 @@
 \renewcommand{\arraystretch}{1.3}
-\begin{tabular}{|>{\centering\arraybackslash}m{3cm}|>{\centering\arraybackslash}m{4.5cm}|>{\centering\arraybackslash}m{5cm}|>{\centering\arraybackslash}m{4cm}|}
+\begin{tabular}{|>{\centering\arraybackslash}m{2cm}|>{\centering\arraybackslash}p{5cm}|>{\centering\arraybackslash}m{5cm}|>{\centering\arraybackslash}m{3cm}|}
     \hline
     \textbf{Name} & \textbf{Parameters} & \textbf{Description} & \textbf{Response} \\ 
     \hline
-    Request policy & \makecell{Location: String \\ Coverage duration: Date \\ Type of coverage: Enum}  & Requests a policy with the given parameters as the underlying conditions & Policy offer including financial conditions \\ 
+    Request policy & \makecell{Location: String \\ Coverage start date: Date \\ Coverage end date: Date \\ Type of coverage: Enum}  & Requests a policy with the given parameters as the underlying conditions & Binding policy offer including financial conditions and a unique policy ID\\ 
     \hline
-    Row 2, Col 1 & Row 2, Col 2 & Row 2, Col 3 & Row 2, Col 4 \\ 
+    Request weather data & \makecell{Location: String \\ Weather start date: Date \\ Weather end date: Date \\ Type of weather data: Enum \\ Frequency: Enum } & Requests weather data in a specific date range. Examples for weather data types are rainfall, wind speed and temperature. Frequency indicates the data granularity (e.g. hourly, daily) & Weather data in JSON format \\ 
     \hline
-    Row 3, Col 1 & Row 3, Col 2 & Row 3, Col 3 & Row 3, Col 4 \\ 
+    Confirmation & \makecell{Policy ID: String \\ Confirmed: Boolean} & Sends a confirmation to the smart contract with the specific policy ID & - \\ 
     \hline
 \end{tabular}
