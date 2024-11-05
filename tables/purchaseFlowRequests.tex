@@ -5,7 +5,7 @@
     \hline
     Request policy & \makecell{Location: String \\ Coverage start date: Date \\ Coverage end date: Date \\ Type of coverage: Enum}  & Requests a policy with the given parameters as the underlying conditions & Binding policy offer including financial conditions and a unique policy ID\\ 
     \hline
-    Request weather data & \makecell{Location: String \\ Weather start date: Date \\ Weather end date: Date \\ Type of weather data: Enum \\ Frequency: Enum } & Requests weather data in a specific date range. Examples for weather data types are rainfall, wind speed and temperature. Frequency indicates the data granularity (e.g. hourly, daily) & Weather data in JSON format \\ 
+    Request weather data & \makecell{Location: String \\ Weather start date: Date \\ Weather end date: Date \\ Type of weather data: Enum \\ Frequency: Enum \\ Data Type: Enum} & Requests weather data in a specific date range. Examples for weather data types are rainfall, wind speed and temperature. Frequency indicates the data granularity (e.g. hourly, daily). Data Type can be either forecast or historical. &  Weather data in JSON format \\ 
     \hline
     Confirmation & \makecell{Policy ID: String \\ Confirmed: Boolean} & Sends a confirmation to the smart contract with the specific policy ID & - \\ 
     \hline

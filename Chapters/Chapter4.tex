@@ -96,7 +96,7 @@ The weather data is provided by Global Surface Summary of the Day (GSOD) and Glo
 
 The decentralized application (DApp) allows a non-technical user to directly interact with the blockchain. Through its interface a user can request insurance policies, check policy statuses and receive notifications. Unlike traditional applications, which interact with a centrally managed backend, decentralized applications interact directly with a smart contract on a blockchain.
 
-This interaction requires a digital wallet (e.g. MetaMask) which enables the user to initiate and sign a transaction when making a request, such as purchasing an insurance policy. In our architecture, the DApp serves as the primary interface in order for the end-users to interact with the system. 
+This interaction requires a digital wallet (e.g. MetaMask) which enables the user to initiate and sign a transaction when making a request, such as purchasing an insurance policy. In our architecture, the dApp serves as the primary interface in order for the end-users to interact with the system. 
 
 (Idea: Include a mockup of a frontend utilizing metamask)
 
@@ -109,9 +109,9 @@ In this case, Chainlink oracles are used to securely interact with the Google Cl
 
 \section{Data flow}
 
-In this section we will present the most important data flows in our system.
+In this section, we examine the two primary data flow scenarios central to our blockchain-based weather insurance system: the process of purchasing a weather insurance policy (see \cref{subsection:purchasePolicyFlow}) and the process of triggering a policy payout (see \cref{subsection:policyPayoutTrigger}). These scenarios represent the fundamental interactions between the end user, the smart contract and the external data sources. In the subsequent chapters we elaborate on the core functionalities utilized in the two scenarios such as the process of retreiving weather data and the calculating of the policy conditions.
 
-\subsection{Purchase weather insurance policy}
+\subsection{Purchase weather insurance policy}\label{subsection:purchasePolicyFlow}
 
 The flow diagram in \cref{fig:purchasePolicyFlow} outlines the steps involved in purchasing a weather insurance policy in out system. The main components involved are the End User, Smart Contract, Chainlink Oracle and the Google Cloud Platform (GCP). Each of these components play a central role in enabling the policy purchase and the associated data retrieval and validation processes. Every request between components includes a set of parameters. These parameters contain the necessary information that each component needs in order to perform its role and functions accurately. For example, in a purchase policy request parameters such as location, coverage duration and type of coverage are sent to the smart contract. Table \cref{tab:flowRequests} contains all requests with their respective parameters.
 
@@ -124,7 +124,7 @@ The flow diagram in \cref{fig:purchasePolicyFlow} outlines the steps involved in
 
 \begin{table}[h]
     \centering
-    \input{tables/requests.tex}
+    \input{tables/purchaseFlowRequests.tex}
     \caption{Requests with their parameters \textit{Source: Author's own representation.}}
     \label{tab:flowRequests}
 \end{table}
@@ -135,11 +135,33 @@ The smart contract then fetches the necessary weather data needed for the calcul
 
 Note that in the diagram there are two "Request weather data" requests depicted. One is from the Smart Contract to the Chainlink oracle and one from the Chainlink oracle to the GCP. Even though the requests differ in their technical details (such as type of request and authorization headers) we have combined them in table \cref{tab:flowRequests} as one entry. This was chosen specifically for simplicity purposes, since the diagram is an abstraction of a policy purchase process and leaves space for flexibility in technical implementation.
 
-\subsection{Policy payout trigger}
+\subsection{Policy payout trigger}\label{subsection:policyPayoutTrigger}
 
-Administrative
+The second main flow is shown in \cref{fig:payoutFlow}. It presents the process of triggering a policy payout. This payout happens when the specified policy conditions from \cref{subsection:purchasePolicyFlow} are fulfilled (assuming a policy has been agreed upon between the end user and the smart contract). 
+
+A key decision in the design of the payout process is determining is what triggers an eligibility check and the following payout process. A possible solution would be to use scheduled tasks that periodically trigger an eligibility request on every policy held by the Smart Contract. Since the Ethereum Blockchain does not support scheduled or automated tasks natively such a solution would require an external solution. For example Chainlink offers an automation service \autocite{chainlink_automation} with which it would be possible to trigger a scheduled eligibility check on the Smart Contract (e.g. once a day). This service would however cost gas which has to be paid by the Smart Contract and result in a lot of unnecessary transactions. In our proposed solution, the end user initiates the eligibility check instead. This decision prioritizes simplicity and cost-efficiency, avoiding extra transactions that would otherwise increase the policy premium for the end user.
+
+After the end user has initiated the eligibility check through the use of a decentralized App (dApp), the Smart Contract gathers the weather data for the specific location and covered duration of the policy. This process of retrieving the relevant weather data is similar to the one in \cref{subsection:purchasePolicyFlow}, with the key distinciton being that the weather data contains past data and not forecast data. Once the weather data is received, the smart contract evaluates whether the conditions for a payout are met and communicates the outcome to the end user. If the end user is eligible for a payout, they can submit a request to the smart contract, which will then transfer the agreed-upon funds as specified in the policy.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/flow-policy-payout-trigger.drawio.pdf}
+    \caption{Payout flow \textit{Source: Author's own representation.}}
+    \label{fig:payoutFlow}
+\end{figure}
+
+\begin{table}[h]
+    \centering
+    \input{tables/payoutFlowRequests.tex}
+    \caption{Requests with their parameters \textit{Source: Author's own representation.}}
+    \label{tab:payoutFlowRequests}
+\end{table}
 
 \subsection{Interaction with smart contract}
+
+As mentioned in \cref{subsection:purchasePolicyFlow} and \cref{subsection:policyPayoutTrigger}, the end user communicates with the Smart Contract through a decentralized App (see \cref{subsection:decentralizedApp}). The dApp interface is indistinguishable from a regular app interface, with the key difference being that it interacts directly with the blockchain. Within the dApp the end user can create the requests and enter the relevant parameters. Once the user submits a request, the dApp creates a transaction that is signed using the end user's digital wallet. This transaction is then broadcasted to the blockchain, where it can interact directly with the smart contract.
+
 \subsection{Calculating policy conditions}
 
 One of the core functions of tghe smart contract is calculating the policy conditions.
