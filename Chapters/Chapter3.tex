@@ -1,4 +1,191 @@
-\chapter{Methodology}\label{chapter:methodology}
-\section{Research Design}\label{section:research_design}
-\section{Data Collection}\label{section:data_collection}
-\section{Prototype development}\label{section:prototype_development}
+\chapter{Development of the Prototype}\label{chapter:development_prototype}
+\section{Requirements}\label{section:requirements}
+
+In order to provide the blockchain-based weather insurance, our system must fulfill several key requirements. In this section we describe each category of requirements in a dedicated subsection.
+
+\subsection{Functional Requirements}\label{subsection:functionalRequirements}
+
+\begin{itemize}
+    \item \textbf{User Interaction}
+    \begin{itemize}
+        \item The system must provide a user interface for purchasing policies and triggering payout eligibility checks. 
+    \end{itemize}
+
+    \item \textbf{Weather Data Integration} 
+    \begin{itemize}
+        \item The system must be able to receive and process global weather data from reliable and trusted external sources such as Global Surface Summary of the Day (GSOD) and Global Forecast System (GFS)
+        \item Both historical and forecast data must be available
+    \end{itemize}
+    
+    \item \textbf{Smart Contract}
+    \begin{itemize}
+        \item The smart contract must allow end users to purchase and terminate weather-based insurance policies based on parameters provided by the end user and the external sources.
+        \item The smart contract must store the policy terms.
+        \item The smart contract must be able to perform eligibility checks on existing policies.
+        \item The smart contract must be able to payout funds for policies that have passed eligibility checks.
+    \end{itemize}
+    
+    \item \textbf{Oracle Integration}
+    \begin{itemize}
+        \item The system must use Chainlink oracles to retrieve and verify weather data from GCP datasets.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Non-Functional Requirements}
+
+\begin{enumerate}
+    \item \textbf{Security}
+    \begin{itemize}
+        \item All the bilateral interactions between the smart contract, Chainlink oracles, GCP and the end user must be secure.
+    \end{itemize}
+    
+    \item \textbf{Scalability}
+    \begin{itemize}
+        \item The system must be able to scale to handle large amounts of policies and end users.
+    \end{itemize}
+    
+    \item \textbf{Transparency}
+    \begin{itemize}
+        \item All transactions and insurance claims must be recorded on the blockchain for transparency purposes.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Technical Requirements}\label{subsection:technicalRequirements}
+
+\begin{enumerate}
+    \item \textbf{Blockchain Platform}
+    \begin{itemize}
+        \item The smart contract must be deployed on the Ethereum blockchain
+    \end{itemize}
+    
+    \item \textbf{Data retrieval}
+    \begin{itemize}
+        \item The system must be able to retreive weather data from GCP.
+    \end{itemize}
+    
+    \item \textbf{Chainlink Oracle}
+    \begin{itemize}
+        \item The system must integrate with a Chainlink node to facilitate data retrieval from GCP.
+    \end{itemize}
+\end{enumerate}
+
+\section{Architecture}
+
+In this section we will propose the architecture for our blockchain-based weather insurance system. First we present a high-level overview of the system and then elaborate on the most important components in a dedicated subsection for each component.
+
+\subsection{General Overview}\label{subsection:generalOverview}
+
+In \cref{fig:generalArchitecture} we present an overview of the general architecture of our proposed system. The center of the architecture is the smart contract deployed on the Ethereum blockchain. It manages all policies and handles the payout process. The end user interacts directly with the smart contract through the use of a decentralized app (see \cref{subsection:decentralizedApp}), where they can request insurance policies and eligibility checks.
+
+The weather data is provided by Global Surface Summary of the Day (GSOD) and Global Forecast System (GFS) respectively. These datasets can be accessed via GCP BigQuery and GCP Storage through the GCP API interface. To bridge the gap between the off-chain data from GCP and the on-chain smart contract, the system uses a Chainlink Oracle (see \cref{subsection:ChainlinkOracle}). This Chainlink Oracle retrieves the weather data from GCP through its API Iiterface and passes it on to the smart contract on the Ethereum blockchain.
+
+This architecture effectively addresses the technical requirements defined in \cref{subsection:technicalRequirements} and ensures compatible and reliable communications between each component.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/architecture-overview.drawio.pdf}
+    \caption{Diagram showing the architecture of the proposed solution. \textit{Source: Author's own representation.}}
+    \label{fig:generalArchitecture}
+\end{figure}
+
+\subsection{Decentralized App}\label{subsection:decentralizedApp}
+
+The decentralized application (DApp) allows a non-technical end user to directly interact with the blockchain. Through its interface a user can request insurance policies, eligibility checks and receive payout funds. Unlike traditional applications, which interact with a centrally managed backend, decentralized applications interact directly with a blockchain.
+
+This interaction requires a digital wallet (for example MetaMask) which enables the user to initiate and sign a transaction when making a request, such as purchasing an insurance policy. In our architecture, the dApp serves as the primary interface in order for the end-users to interact with the smart contract. 
+
+\subsection{Integration of Chainlink Oracles and the Google Cloud Platform}\label{subsection:ChainlinkOracle}
+
+Since the weather data from GSOD and GFS, which is accessed through the GCP datasets, is not directly available from the on-chain environment of the smart contract we need to leverage oracles, which retreive and verify external data before delivering it to the blockchain.
+
+In our proposed system, Chainlink oracles are used to securely interact with the GCP and pass the data on to the smart contract. The Chainlink oracle network consists of globally distributed nodes. When a request is triggered, multiple nodes independently access GCP and receive the weather data specified in the request. If any nodes return results that differ from the majority, they are flagged as potentially malicious. This decentralized approach ensures that only verified and reliable weather data is passed on to the smart contract.
+
+\section{Data flow}
+
+In this section, we examine the two primary data flow scenarios central to our blockchain-based weather insurance system: the process of purchasing a weather insurance policy (see \cref{subsection:purchasePolicyFlow}) and the process of triggering a policy payout (see \cref{subsection:policyPayoutTrigger}). These scenarios represent the fundamental interactions between the end user, the smart contract and the external data sources. In the subsequent chapters we elaborate on the core functionalities utilized in the two scenarios such as the process of retreiving weather data and calculating the policy conditions.
+
+\subsection{Purchase Weather Insurance Policy}\label{subsection:purchasePolicyFlow}
+
+The sequence diagram in \cref{fig:purchasePolicyFlow} outlines the steps involved in purchasing a weather insurance policy in our proposed system. The main components are the end user, the smart contract, Chainlink oracle and the Google Cloud Platform (GCP). Each of these components play a central role in enabling the policy purchase and the associated data retrieval and validation processes. Every request between components includes a set of parameters. These parameters contain the necessary information that each component needs in order to perform its role and functions accurately. For example, in a purchase policy request parameters such as location, coverage duration and type of coverage are sent to the smart contract. Table \cref{tab:flowRequests} contains all requests with their respective parameters.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/flow-purchase-policy.drawio.pdf}
+    \caption{Sequence diagram of purchasing an insurance policy in our proposed system \textit{Source: Author's own representation.}}
+    \label{fig:purchasePolicyFlow}
+\end{figure}
+
+\begin{table}[h]
+    \centering
+    \input{tables/purchaseFlowRequests.tex}
+    \caption{Requests in \cref{fig:purchasePolicyFlow} with their parameters \textit{Source: Author's own representation.}}
+    \label{tab:flowRequests}
+\end{table}
+
+The end user starts the process by requesting a weather insurance policy from the smart contract. This interaction happens through the use of a decentralized app (dApp) \cref{subsection:decentralizedApp}, which is not explicitly mentioned in the diagram but can be thought of as the interface enabling the end user to interact directly with the smart contract. Through the dApp the end user can request a weather insurance policy. In table \cref{tab:flowRequests} we find the detailed description of each request. In the policy request the user has to specify the conditions of the policy, these include the location, start- and end-date, the type of coverage (for example drought coverage or storm coverage) as well as the data type (whether the request should return historical or forecast data).
+
+The smart contract then fetches the necessary weather data needed for the calculation of the policy conditions by sending a request to the Chainlink oracle containing the necessary parameters (see "Weather data request" in table \cref{tab:flowRequests}). The Chainlink oracle propagates this request to the Google Cloud Platform (GCP). Due to the decentralized nature of Chainlink oracles this request is sent multiple times to the GCP from different Chainlink nodes (see \cref{subsection:ChainlinkOracle}). The responses from each of these requests are then analyzed and verified by the Chainlink network beofre being sent back to the smart contract. The smart contract calculates the policy conditions (such as the premium amount) and sends an offer to the end user. If the end user accepts the terms offered by the smart contract, then the policy is valid and registered on the blockchain.
+
+Note that in the diagram there are two "Request weather data" requests depicted. One is from the smart contract to the Chainlink oracle and one from the Chainlink oracle to the GCP. Even though these requests differ in their technical details (such as type of request and authorization headers) we have combined them in table \cref{tab:flowRequests} as one entry. This was chosen specifically for simplicity purposes, since the diagram is an abstraction of a policy purchase process and leaves space for flexibility in technical implementation.
+
+\subsection{Trigger Policy Payout}\label{subsection:policyPayoutTrigger}
+
+The second data flow is shown in \cref{fig:payoutFlow}. It presents the process of triggering a policy payout. This payout happens when the specified policy conditions from \cref{subsection:purchasePolicyFlow} are fulfilled (assuming a policy has been agreed upon between the end user and the smart contract beforehand). 
+
+A key decision in the design of the payout process is determining is what triggers an eligibility check and the following payout process. A possible solution would be to use scheduled tasks that periodically trigger an eligibility request on every policy held by the smart contract. Since the Ethereum blockchain does not support scheduled or automated tasks natively, such a solution would require an external solution. For example Chainlink offers an automation service \autocite{chainlink_automation} with which it would be possible to trigger a scheduled eligibility check on the smart contract (for example once a day). This service would however cost gas which has to be paid by the smart contract and result in a lot of unnecessary transactions. In our proposed solution, the end user initiates the eligibility check instead. This decision prioritizes simplicity and cost-efficiency, avoiding unnecessary transactions that would otherwise increase the policy premium for the end user.
+
+After the end user has initiated the eligibility check through the use of a decentralized App (dApp), the smart contract gathers the weather data for the specific location and covered duration of the policy. This process of retrieving the relevant weather data is similar to the one in \cref{subsection:purchasePolicyFlow}, with a key distinciton being that the weather data contains past data and not forecast data. Once the weather data is received, the smart contract evaluates whether the conditions for a payout are met and communicates the outcome to the end user. If the end user is eligible for a payout, they can submit a request to the smart contract, which will then transfer the agreed-upon funds as specified in the policy.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/flow-policy-payout-trigger.drawio.pdf}
+    \caption{Sequence diagram of triggering a policy payout \textit{Source: Author's own representation.}}
+    \label{fig:payoutFlow}
+\end{figure}
+
+\begin{table}[h]
+    \centering
+    \input{tables/payoutFlowRequests.tex}
+    \caption{Requests \cref{fig:payoutFlow} with their respective parameters \textit{Source: Author's own representation.}}
+    \label{tab:payoutFlowRequests}
+\end{table}
+
+\subsection{Interaction with the Smart Contract}
+
+As mentioned in \cref{subsection:purchasePolicyFlow} and \cref{subsection:policyPayoutTrigger}, the end user communicates with the smart contract through a decentralized app (see \cref{subsection:decentralizedApp}). The dApp interface is indistinguishable from a regular app interface, with the difference being that it interacts directly with the blockchain instead of a traditional backend. Within the dApp the end user can create the requests and enter the relevant parameters. Once the user submits a request, the dApp creates a transaction that is signed using the end user's digital wallet. This transaction is then broadcasted to the blockchain, where it can interact directly with the smart contract.
+
+As the focus of this prototype is primarily on the general architecture of a blockchain-based weather insurance solution and its smart contract functionality, we will not delve further into the specifics of decentralized app (dApp) development, since it is not necessary for the subsequent analysis.
+
+\subsection{Calculating Policy Conditions}
+
+One of the core functions of the smart contract is calculating the policy conditions. In \cref{fig:purchasePolicyFlow} it is presented as an internal process of the smart contract. This process involves assessing the parameters provided by the end user in the "Request policy" request (see \cref{tab:flowRequests}) as well as the weather data that the smart contract receives from GCP through the "Request weather data" request (see \cref{tab:flowRequests}).
+
+In a first validation step, the smart contract ensures that all the parameters are valid, for example that the location is within a supported region and that the coverage is within the allowed limits. Latter is defined through the furtherst available forecast data, which in our solution is 16 days \autocite{NOAA_GFS}. Next follows the calculation for the policy conditions based on these parameters. These conditions are the following:
+
+\begin{itemize}
+    \item Premium amount (the cost of the policy that is paid by the end user)
+    \item Trigger conditions (specific thresholds or events that must occur for a payout to be issued, for example rainfall above a certain level)
+    \item Coverage limit (the maximum payout amount available under the policy in the case where the conditions for a payout are met)
+\end{itemize}
+
+Note that the coverage limit is defined by the end used in the "Request policy" request (see \cref{tab:flowRequests}) but still has to be validated and included in the policy by the smart contract since there may be limits for a maximum coverage amount due to the total funds held by the smart contract.
+
+Calculating the premium amount is the most critical part in the policy conditions. It defines the balance between risk and reward for both the end user and the smart contract. The premium is determined using a formula that considers the following key factors:
+
+\begin{itemize}
+    \item Coverage duration
+    \item Location
+    \item Type of coverage
+    \item Forecast weather data
+    \item The contract margin
+\end{itemize}
+
+This formula represents a fundamental approach for premium calculation. However, it can be further refined by including historical data and actuarial models, allowing for a more dynamic calculation based on real-world risk. Developing a fully-realized mathematical formula suitable for the usage in a production environment is beyond the scope of this thesis. Instead, we focus on identifying and outlining the key factors that are included in the formula. In the analysis chapter (include reference), these factors will be evaluated to compare the premium calculation approach in a blockchain-based insurance system with that of a traditional weather insurance model.
+
+\subsection{Smart contract fetching weather data}
+
+Both in \cref{fig:purchasePolicyFlow} and in \cref{fig:payoutFlow} the retrieval of weather data from GCP plays a central role. The security and transparency of our blockchain-based system is only as strong as each component involved in the data retrieval chain. By using Chainlink oracle (include reference), the smart contract can maintain its decentralized nature. 
+
+
+\section{Real-world application of the prototype}\label{section:real_world_application_prototype}

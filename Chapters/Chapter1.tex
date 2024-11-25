@@ -1,14 +1,16 @@
-% Chapter 1
 \chapter{Introduction}\label{chapter:introduction} 
 
-Introduction text ?
+Weather-related disasters are among the most significant challenges of the 21st century. Due to climate change their frequency and severy continue to increase steadily \autocite{van2006impacts}. These events not only cause destruction but also result in substantial economic losses for individuals, businesses and governments \autocite{monasterolo2020climate}. In order to mitigate the financial impact of such disasters, insurance has long been the primary tool by providing a financial safety that increases stability. However, traditional insurance face growing challenges in addressing the scale of modern climate risks.
 
+Traditional weather insurance systems struggle with inefficiencies. Manual claim assessments, systemic risk and the lack of transparency and trust higlight the limitations of these systems. To address these shortcomings innovative solutions are needed. Among them, blockchain technology has emerged as a promising alternative to traditional insurance systems. By leveraging key features such as decentralization, transparency and automation a blockchain-based weather insurance system aims to overcome the inefficiencies of traditional models. 
+
+This thesis proposes a blockchain-based weather insurance system as an alternative to traditional insurance models. The study explores how this approach addresses the limitations of traditional models while improving efficiency, transparency and trust. Furthermore, it examines potential real-world applications and evaluates the feasibility and impact of such a system in practical scenarios.
 
 
 \section{Background}\label{section:background}
 In 2016, global disasters accounted for USD 175 billion in economic losses. USD 54 billion of these economic losses were insured, resulting in uninsured losses of USD 121 billion \autocite{swissre2017}. These losses highlight the importance of wheather insurance in providing financial protection for individuals, business and governments. For comparison, the international humanitarian assistance reached USD 28 billion in 2015, making the unsinsured losses of 2016 over 4 times that amount \autocite{development2016humanitarian}.
 
-
+Predictions support a worsening of these losses due to intensifying climate risks. \autocite{cho2022climate} states that insurance premiums are projected to increase by more than 5 percent and property losses from natural disasters could increase by up to 60 percent by 2040. These projections align with \autocite{tucker1997climate}, who states that the increased probability of extreme weather events will result in increased weather insurance premiums. 
 
 
 \subsection{Existing Weather Insurance}
@@ -17,6 +19,52 @@ Traditional weather insurance primarily consisted of crop insurance. The policy 
  Crop insurance has some major problems associated with it. One of these problems is the manual process of analyzing and determining the loss in a monetized amount by an insurance company representative. Other problems include systemic risk, where many insurance holders in the same region are in risk of being affected through weather conditions simultaneously, and asymmetric information, where, for example, insurance holders act more riskily than they normally would because they know they are insured \autocite{makki2002crop}.
 
  \sloppy A more modern approach to weather insurance compared to the traditional crop insurance is weather-based index insurance. The key difference here is that weather-based index insurance relies on a measurable variable (such as a temperature drop below a certain threshold or a specific amount of rainfall). The underlying weather data is provided by a reference weather station. The goal is for the criteria (e.g. the temperature threshold) to reflect the financial loss experienced by the insurance holder, for example the loss of a corn field due to adverse weather conditions \autocite{kajwang2022weather}.
+
+
+ \subsection{Key limitations in existing weather insurance}\label{section:key_limitations_existing_insurance}
+ 
+ \subsubsection{Administrative costs}
+ 
+ In Traditional crop insurance the administrative costs make up 35\% to 40\% of the insurance outlays while the remaining portion goes towards other costs such as the insurance payout and the reinsurance costs \autocite{glauber2004crop}. The majority of these administrative costs consist of loss assessment, monitoring, claims, and underwriting expenses.
+ 
+ In index insurance the administrative costs are significantly lower than in crop insurance because the payouts are based on predefined weather indices rather than assessing individual losses. This index-based insurance model also reduces moral hazards since the payouts are triggered by weather events rather than individual actions. \autocite{kusuma2018viable} proposes a weather-based index insurance for rice in Indonesia. It  is desgined to be cost-effective by basing the insured amount on the cost of inputs (e.g. seed and fertilizer) rather than covering the individual revenue loss.
+ 
+ In \cref{section:smart_contracts_insurance} the thesis will discuss how smart contracts can be used to lower administrative costs through automated processes even more than weather-based index insurance.
+ 
+ \subsubsection{Systemic risk}
+ 
+ A key limitation for existing weather insurance is the systemic risk it poses. \autocite{xu2010systemic} explains how weather risk is systemic in nature, meaning that weather-related events like droughts or floods often affect entire regions rather than isolated areas.In such an event, a large number of insurance holders would file claims simultaneously, making it difficult for the insurance company to payout all these claims at the same time. It further shows that systemic risk is one of the key reasons why existing weather-based insurance markets have struggled and often require government subsidies, especially in the case of crop insurance. 
+ 
+ Based on \autocite{salgueiro2021diversification}, which shows how geographic diversification of the insurance solution reduces the systemic risk, this thesis proposes that a solution based on blockchain technology, which allows for global scalability and diversification, could further reduce systemic risk by creating more decentralized risk pools.
+ 
+ \subsubsection{Lack of transparency and trust}
+ 
+ The relience of the insurance industry on trust is well established \autocite{courbage2021trust}. \autocite{guiso2012trust} finds that in low trust environments the transaction costs and subsequently the insurance premiums are high. For example, \autocite{gennaioli2022trust} found that in countries with a low trust index in the financial markets the amount of rejected claims can rise up to 35\% while on average hovering around 20\% worldwide. 
+ 
+ Due to the immutability and the public nature of the blockchain, it offers foundational trustworthy features. \autocite{hawlitschek2018limits} notes however that completely trust-free systems may not be possible since they may still rely on trusted intermediaries. In our system we will use intermediary entites as well, for example Chainlink (see \cref{section:chainlink_google_cloud_datasets}).
+ 
+ \subsubsection{Fraud and manipulation}
+ 
+ Closely related to the subject of transprancy and trust is fraud and manipulation. Since blockchain records are stored across a worldwide network of nodes, changes to past transactions are close to impossible without a consensus from the majority. This significantly lowers the risk of fraudulent alterations and manipulation within the blockchain \autocite{eigelshoven2021cryptocurrency}. 
+ 
+ \section{Smart contracts in Insurance}\label{section:smart_contracts_insurance}
+ 
+ In 2017 the insurance company AXA launched fizzy, a flight insurance based on smart contract technology. It was one of the earliest examplex of the adaption of blockchain technology in the insurance industry. Fizzy was quite simple. A customer entered his flight details and paid a premium for the insurance. Later Fizzy then used an oracle to check whether the flight has been delayed for more than 2 hours and if so would trigger a payment automatically \autocite{hoffmann2021double}.
+ 
+ \section{Chainlink and Google Cloud Public Datasets}\label{section:chainlink_google_cloud_datasets}
+ 
+ For the prototype this thesis will use Chainlink, a decentralized oracle service, in order for our smart contract to access real-world weather data. The decentralized nature of Chainlink improves the security and reliability of the data-inputs \autocite{beniiche2020study}.
+ 
+ Specifically, Global Surface Summary of the Day (GSOD) wlil be used as the weather data source. Over 9000 station provide weather data for the dataset with each station having to report a minimum of 4 observations per day of a set of measured variables including temperature, wind speed, pressure among others. \autocite{NOAA_GSOD_2023}. The entire dataset is hosted on the Google Cloud Platform (GCP) and is updated daily.
+ 
+ Additionally, the Global Forecast System (GFS) is used which provides weather data prediction globally of up to 16 days. It is a numerical system based on four different models (atmosphere, ocean, land and sea model) and is hosted on the Google Cloud Platform (GCP) alongside Global Surface Summary of the Day (GSOD) \autocite{NOAA_GSOD_nd}.
+ 
+ \section{Technical and regulatory challenges of Smart Contracts}\label{section:regulatory_technical_challenges}
+ 
+ \autocite{gatteschi2018blockchain} expresses concerns that the technology is still being explored and not yet ready for its benefits to become more evident. One challenge faced by smart contracts in the insurance industry is technical readiness. Oracles are the external data sources that provide real-world information to smart contracts. The integrity of the smart contract is dependent on the reliability of these oracles and the validity of their data. 
+ 
+ Another important point to consider are the different kinds of legal problems associated with smart contracts. For one there is no accepted universal definition of a smart contract which leads to difficulties in defining their legal status across different jurisdictions. There are also concerns about consumer protection laws since an automated transaction initiated by a smart contract may violate local regulations if consumers are unable to legally contest or reverse it \autocite{ferreira2021regulating}.
+
 
 
 \section{Problem Statement}\label{section:problem_statement}
