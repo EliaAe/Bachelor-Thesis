@@ -16,15 +16,48 @@ The primary goal is to support the design of a blockchain-based weather insuranc
 
 In a first step, the economic significance of weather insurance is presented by providing financial costs and losses associated with weather-related disasters. This analysis is based on current reports from reputable international organizations, such as Swiss Re, which regularly publishes data on the economic impact of such events. These reports provide the quantitative basis for emphasizing the need for innovative insurance solutions like those explored in this thesis.
 
-Subsequently, qualitative research is conducted to establish the technical and practical foundation for the development of a blockchain-based weather insurance system as an alternative to the traditional model. This research includes..
+Subsequently, qualitative research is conducted to establish the technical and practical foundation for the development of a blockchain-based weather insurance system as an alternative to the traditional model. This research includes an in-depth review of academic literature, industry white papers and technical documentation related to blockchain technology, smart contracr and their application in insurance systems. This qualitative analysis aims to identify potential advantages of using blockchain in weather insurance, such as increased transparency, trust and reduced administrative costs.
+
+By combining qualitative insights with quantitative data, this thesis establishes a coomprehensive foundation for designing, implementing and evalutating a blockchain-based weather insurance system compared to a traditional system.
 
 \subsection{Source Selection Criteria}
-Sources were selected based on their relevance to the topic of interest, such as blockchain technology, decentralized oracles, smart contracts and GCP datasets. Give the rapidly evolving nature of blockchain technology and its components  recent and regurarly updates sources such as developer documentation and current reports were included in the research to ensure technical relevance (give examples for reports such as swiss RE etc). Financial aspects of blockchain technology are laid out in more scientifically solid research such as (give examples for solid financial source of blockchain technology). 
+Sources were selected based on their relevance to the topic of interest, such as blockchain technology, decentralized oracles, smart contracts and GCP datasets. Given the rapidly evolving nature of blockchain technology and its components  recent and regurarly updates sources such as developer documentation and current reports were included in the research to ensure technical relevance (give examples for reports such as swiss RE etc). Financial aspects of blockchain technology are laid out in more scientifically solid research such as (give examples for solid financial source of blockchain technology). 
 
 To provide a well-rounded perspective, the research selection included academic literature and scientific papers on top of the above mentioned industry reports and documentation. In the analysis chapter the diverse range of the selected research is synthesized in order to produce a cohesive and meaningful evaluation.
 
-Idea: Challenges in Data collection
-Idea: Specific data types? (historical weather data, performance metrics)
-Idea: Data Sources (From where to get weather data, insurance data and blockchain data)
+\subsection{Specific data types}
+This subsection focuses on the identification and categorization of specific data types essential for the development and evaluation of the blockchain-based weather insurance system. The data tyoes are divided into three primary categories: meteorological data, technical data and miscalleneous. Each category serves a distinct purpose within the system's design and research. 
 
-\section{Prototype development}\label{section:prototype_development}
+\subsubsection{Meteorological data}
+This data includes real-time and historical weather information, such as temperature, wind speeds and other climate variables (todo: more aspects). This meteorological data forms the foundation for triggering insurance payouts, making its precision and availability critical to the system's success. The meteorological is primarily sourced from governmental meteorological agencies (todo: include sources) and made available to the smart contract via the use of decentralized oracles.
+
+\subsubsection{Technical data}
+Technical data refers to specific information required to design the blockchain-based weather insurance system and organize its components. This includes information about blockchain technology, smart contracts, Chainlink and GCP. This technical data ensures the system is robust, efficient and fulfills the requirements outlined in (include reference). The primary sources for this data are developer documentations and architecturial blueprints about the components used in the blockchain-based system. 
+
+\subsubsection{Miscalleneous data}
+This data encompasses diverse information types that support the broader objectives of the thesis, particularly in identifying limitations in traditional weather insurance systems and emphasizing the need for robust alternatives. Specifically, these include economic data about the relevance of weather insurance systems, such as financial losses from weather-related disasters. It also includes regulatory data to assess the compliance challenges faced by traditional and blockchain based systems. Primary sources for this information are academic literature, research papers and current reports.
+
+\subsection{Challenges in Data collection}
+The data collection process for analyzing and designing a blockchain-based weather insurance system faces several challenges, originating from the evolving nature of blockchain technology and the inherent complexity of insurance systems. These challenges span across technical and organizational domains, both of which must be addressed to ensure the validity of the proposed system.
+
+One of the primary challenges is the rapid evolvement of blockchain technology. While it does offer innovative aspects like decentralization, transparency and automation, the technology is still in its early stages, with frequent updates to technical documentations and shifts in standards. Ensuring compatibility between blockchain components, decentralized oracles and real-world weather data requires continous monitoring and adaptation, adding complexity to the data collections process.
+
+Additionally, insurance systems are highly complex, involving numerous components that influence policy design, premium calculation, risk assessment and claim management. Collecting comprehensive research to address these variables requires synthesizing diverse sources. However, these data sources often vary significantly in their format and scope, such as structured datasets, unstructured text, historical or current information. The granularity of this data can differ as well, with some sources providing localized information while others offer only high-level insights, making it challenging to align and analyze the data consistently. Moreover, the reliability of these sources can be inconsistent, with some being prone to errors, omissions or outdated information. Consideration of these variations necessitates the use of data transformation and validation techniques, in order to ensure a cohesive and accurate representation of the overall system.
+
+Another challenge lies in the dynamic and regional nature of weather events. Many regions lack comprehensive weather monitoring infrastructure, leading to data scarcity that prevents the use of a blockchain-based system (todo: expand or remove).
+
+\section{Key technologies and tools}\label{section:prototype_development}
+
+The development of the blockchain-based weather insurance prototype (\cref{chapter:development_prototype}) required deliberate selection of technologies and tools that align with the objective of developing a blockchain-based protoype that utilizes decentralized oracles and globally available weather data (\cref{section:objectives}). 
+
+\subsection{Etherum Blockchain Technology}
+Ethereum was chosen as the underlying blockchain due to its support for decentralized applications (dApps) and smart contracts (todo source). It is widely adopted across both academic and industry settings (todo source). Its ecosystem provides flexible and extensive integration tools, libraries and frameworks, making it a suitable choice for an innovative blockchain-based system (todo source). Ethereum's public nature ensures transparency, which is critical for strengthening trust in insurance systems. While alternatives such as Hyperledger Fabric were considered, Ethereum's widespread adoption and compatibility with decentralized oracles made it the preferred option.
+
+\subsection{Smart Contracts}
+Smart contracts form the backbone of the system by automating critical functions such as premium calculation, policy management and payout execution. The rationale for their use lies in their ability to eliminate intermediares, reduce administrative costs and ensure rule-based execution. By coding the insurance logic directly onto the blockchain, smart contracts provide a transparent and immutable way for enforcing policy terms. Their native support on the Ethereum blockchain makes this choice ideal for achieving the systems objectives of efficiency, transparency and trust.
+
+\subsection{Chainlink}
+A critical functionality needed for a blockchain-based weather insurance system is bridging the gap between off-chain data and on-chain smart contract execution. The use of traditional centralized APIs were rejected since they represent a single point of failure, which could compromise data integrity and reliability of the system. To achieve the transparency objectives of this thesis a decentralized oracle service was chosen. Chainlink's compatibility with Ethereum simplifies the integration process for a functional system and ensures through its decentralized architecture that the weather data can securely be retrieved and used to trigger the logic embedded in the smart contract.
+
+\subsection{Google Cloud Public Datasets}
+Google Cloud Public Datasets were chosen as the supplier of historical and current weather information. These datasets are maintained by reputable organizations and provide data on a large scale. Google Cloud's access to a vast number of diverse datasets and compatibility with modern data processing tools such as oracles provide a practical and efficient solution. (todo write more)
