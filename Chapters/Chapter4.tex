@@ -50,25 +50,49 @@ The proposed system fulfills the technical requirements by leveraging Ethereum a
 \section{Comparative Analysis}
 In this chapter we comapre the blockchain-based approach used in our prototype with the traditional weather insurance model. The analysis presents key areas where our blockchain-based system offers significant improvements, such as transparency, automation and efficiency, while simultaneously we address limitations and potential trade-offs.
 
-\subsection{Efficiency and Bureaucracy}
+\subsection{Efficiency and Bureaucracy}\label{efficiency_bureaucracy}
 Traditional insurance models are often hindered through extensive bureaucracy and manual processes. Polciy creation, eligibility checks and claim payouts often involve multiple intermediares, leading to increased administrative costs. In \cref{subsection:purchasePolicyFlow} and \cref{subsection:policyPayoutTrigger} we present how in a blockchain-based system these inefficiencies can be eliminated through automated processes. A key part in that automation are the capabilities of smart contracts and blockchain technology, enabling the retrieval and validation of external data, such as weather and user data through decentralized Oracles and decentralized Apps (dApps). Such a system not only reduces the burocratic expenses but also accelerates the processing time, through which the end user can profit greatly.
 
 Furthermore, a dApp interface provides the user with a single point of access, simplifying the interaction process and eliminating the communication challenges often encountered in traditional models such as complex paperwork or lengthy approval processes. This streamlined approach gives the blockchain-based system a significant advantage for spontaneous and short-term insurance needs, such as travel insurance (see \cref{tourism_industry}).
 
-\subsection{User Interaction and Trust}
+\subsection{User Interaction and Trust}\label{user_interaction_and_trust}
 The proposed blockchain-based weather insurance system significantly improves user interaction while boldening trust through its transparent and decentralized design. In traditional models, users interact only with the front-end interface of an insurance provider, without insights into the backend processes. Our proposed solution offers users a clear view of the system's backend processes through the record-keeping of the smart contract on the blockchain. This transparency not only enhances the user experience by providing greater confidence in the system's operations but also boldens trust by ensuring that all transactions and processes are verifiable and immutable.
 
 By combining the intuitive user interface of a dApp and its security feature with reliability and transparency of blockchain technology, the system not only simplifies user interaction but also builds a foundation of trust, addressing two key challenges faced by traditional insurance models. 
 
-\subsection{Accessability and Transparency}
+\subsection{Accessability and Transparency}\label{accessibility_transparency}
 Traditional insurance models often rely on centralized offices and intermediaries, which can limit their reach to users in local environments. The proposed system in contrast can operate through a dApp anywhere in the world where sufficient internet infrastructure exists. Combined with the digital wallet, which can hold the necessary cryptocurrency, the system enables policy creation, eligibility checks and payouts without the need for cumbersome documentation or in-person visits. This accessibility is particularly beneficial for individuals and businesses in regions vulnerable to extreme weather events and lacking insurance infrastructure. Moreover, the users of the proposed system can view the entire lifecycle of their insurance policy, from polciy creation to payout. This level of transparency can enhance trust and user engagement, particularly among users in regions where confidence in traditional companies is inherently low. By combining a globally accessible interface with transparent blockchain record-keeping, the proposed system offers a reliable, trustworthy solution to weather-based insurance needs.
 
 \subsection{Trade-offs and Limitations}
 While the blockchain-based weather insurance system offers significant advantages over traditional models, such as transparency, efficiency, and accessibility, it also comes with trade-offs and limitations.
 
-Regulatory Challenges: todo
+\subsubsection{Scalability Challenges}
+The scalability is heavily influenced by the underlying Ethereum blockchain, which has limited transaction throughput. A high congestion in the network can lead to increased gas fees and slower transaction processing times. These issues may pose challanges with a large user base, especially during a time of high demand, such as a natural disaster, where the system could become congested, leading to significantly increased gas fees.
+
+todo: expand on scalability issues and include it in previous chapters!
+
+\subsubsection{Regulatory Challenges}
+An implementation of the proposed blockchain-based insurance system faces a range of regulatory challenges. These challenges are due to the innovative nature of blockchain technology, which often exists outside of traditional legal frameworks.
+
+A key part of regulatory considerations in a blockchain-based insurance system is compliance with local licensing requirements. In most parts of the world, approvals or licenses are required to operate as an insurance provider legally. Furthermore, a decentralized system may conflict with a centralized oversight, since existing regulatory framworks are designed for centralized entities, where oversight is done through reportings, audits and direct communication with regulatory authorities. A blockchain-based system, which by nature lacks a central authority or entity, may create conflicts with these established systems of oversight.
+
+Moreover, the global nature of the system adds another layer of complexity. Since it can be accessed from anywhere on the globe, it raises questions as to which regulatory frameworks apply in which cases, especially in a cross-border environment.
+
+Such regulatory limitations could reduce key advantages of our proposed system such as the ones outlined in \cref{accessibility_transparency} and \cref{efficiency_bureaucracy}
+
+\subsubsection{User adaption}
+The adoption of new technologies, especially in rural areas, often faces challenges based on skepticism and unfamiliarity. Many individuals have prejudices against emerging technologies like blockchain, viewing them as too complex, untrustworthy, or unnecessary. This skepticism can result in slower user adoption rates than what might be expected based on the system's rational benefits and capabilities outlined in this thesis.
+
+Additionally, the proposed system introduces unique concepts, such as digital wallets, dApps and smart contracts, which require a basic level of technical understanding. This can act as an entry barrier for individuals who have limited time or access to educational resources. This time and effort needed to understand the system's functionality and advantages may discourage users from engaging with a blockchain-based system, further slowing down adoption.
 
 \section{Discussion of Key findings}
+This section discusses the key finding of the proposed blockchain-based system in relation the research objectives outlined in \cref{section:objectives} and the requirements specified in \cref{section:requirements}. 
+
+In a first step we outlined the key limitations of existing weather insurance systems in \cref{section:key_limitations_existing_insurance}. Among these key limitations are big administrative costs, inefficiencies and lack of transparency and trust. Based on these limitations of traditional models, the thesis deduced a set of requirements for a blockchain-based weather insurance system outlined in \cref{section:requirements} and developed a prototype, which represents a blueprint for a concrete implementation of such a system. Key functionalities, such as policy creation, eligibility checks and automated payouts can operate seamlessly through the smart contract and together with the integration of Chainlink oracles, which ensure a reliable retreival of external weather data from GCP, and decentralized Apps, which enable the end user to interact with the smart contract, the proposed solution successfully meets all functional and non-functioanl requirements.
+
+The evaluation and comparison of the blockchain-based insurance system revealed that it outperforms traditional insurance models in several key areas. These key areas include transparency, efficiency and accessability. However, traditional systems still hold massive advantages in areas such as familiarity and regulatory alignment. The complexity of blockchain technology and the lack of widespread adaption and education about its benefits may slow user adoption (todo: expand this abstract).
+
+//todo: Include somewhere the fact that this thesis chose weather insurance because of simplicity of data retreival and objectiveness of weather data etc. (doesnt have to be here)
 
 \section{Analysis of smart contracts in the insurance industry}\label{section:analysis_smart_contracts_insurance}
 //optional
