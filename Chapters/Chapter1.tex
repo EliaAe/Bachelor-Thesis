@@ -65,10 +65,10 @@ Another example is Lemonade, a pioneering company in the InsuranceTech industry.
 \section{Chainlink and Google Cloud Public Datasets}\label{section:chainlink_google_cloud_datasets}
 For the prototype, this thesis will use Chainlink, a decentralized oracle service, which enables our smart contract to access real-world weather data. By retrieving relevant weather data from Google Cloud Platform (GCP) and delivering it to the smart contract, Chainlink ensures that the prototype has consistent and validated data inputs. GCP hosts a wide range of datasets, two of which will be used in this system: the Global Surface Summary of the Day (GSOD) and the Global Forecast System (GFS). These datasets provide comprehensive historical and predictive weather data, enabling the proposed blockchain-based weather insurance system to create policies based on the received weather data.
 
-\subsection{Global Surface Summary of the Day}
+\subsection{Global Surface Summary of the Day}\label{GSOD}
 Global Surface Summary of the Day (GSOD) will be used as the primary weather data source. Over 9'000 stations provide weather data for the dataset, with each station required to report a minimum of four observations per day of a set of measured variables, including temperature, wind speed, pressure and others. This high frequency, comprehensiveness and global coverage of the GSOD dataset makes it an ideal source for a blockchain-based weather insurance system. The entire dataset is hosted on the GCP and updated daily, ensuring consistent access to the latest weather data. \autocite{NOAA_GSOD_2023}.
 
-\subsection{Global Forecast System}
+\subsection{Global Forecast System}\label{GFS}
 In addition to GSOD, the prototype also utilizes data from the Global Forecast System (GFS), which provides global weather predictions for up to 16 days. Unlike GSOD, which focuses on historical weather data, GFS is a numerical system based on four different models (atmosphere, ocean, land, and sea) which together produce highly accurate and detailed weather forecasts. Similar to GSOD, GFS is hosted on the GCP as well, allowing for the reutilization of GCP access methods within the system and ensuring access to a comprehensive collection of weather data \autocite{NOAA_GSOD_2020}.
 
 \subsection{Integration via Chainlink}
