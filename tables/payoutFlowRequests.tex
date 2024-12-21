@@ -3,10 +3,10 @@
     \hline
     \textbf{Name} & \textbf{Parameters} & \textbf{Description} & \textbf{Response} \\ 
     \hline
-    Request eligibility & \makecell{Policy ID: String}  & Requests an eligibility check which is then performed by the Smart Contract & Whether the policy is eligible for a payout or not in JSON format \\
+    Request eligibility & \makecell{Policy ID: String}  & Requests an eligibility check, which is then performed by the smart contract. & Whether the policy is eligible for a payout or not in JSON format. \\
     \hline
-    Request weather data & \makecell{Location: String \\ Weather start date: Date \\ Weather end date: Date \\ Type of weather data: Enum \\ Frequency: Enum \\ Data Type: Enum} & Requests weather data in a specific date range. Examples for weather data types are rainfall, wind speed and temperature. Frequency indicates the data granularity (e.g. hourly, daily). Data Type can be either forecast or historical. &  Weather data in JSON format \\ 
+    Request weather data & \makecell{Location: String \\ Weather start date: Date \\ Weather end date: Date \\ Type of weather data: Enum \\ Frequency: Enum \\ Data Type: Enum} & Requests weather data in a specific date range. Examples of weather data types include rainfall, wind speed, and temperature. Frequency indicates the data granularity (e.g. hourly, daily). Data Type can be either forecast or historical. &  Weather data in JSON format. \\ 
     \hline
-    Request payout & \makecell{Policy ID: String} & Requests the payout of funds & Amount of funds specified in the policy \\ 
+    Request payout & \makecell{Policy ID: String} & Requests the payout of funds. & Amount of funds specified in the policy. \\ 
     \hline
 \end{tabular}

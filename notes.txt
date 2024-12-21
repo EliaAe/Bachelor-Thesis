@@ -7,3 +7,8 @@ TODOS
 - optional idea: include reference to references in chapter 2 (Methodology)
 - expand chainlink oracle subsection
 - expand subsection Google Cloud Public Datasets in chapter 2
+- expand requirements in chapter 3, especially technical and non-functional ones
+- make sure analysis mnentions that scability could not be achieved (is in the requirements)
+- include in future work that a system on a scalable blockchain might be better
+- potentially review the Scalability and Global Reach section (Chapter 3)
+- include dApp in requirements?
