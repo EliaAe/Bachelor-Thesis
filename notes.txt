@@ -12,3 +12,5 @@ TODOS
 - include in future work that a system on a scalable blockchain might be better
 - potentially review the Scalability and Global Reach section (Chapter 3)
 - include dApp in requirements?
+- Include somewhere the fact that this thesis chose weather insurance because of simplicity of data retreival and objectiveness of weather data etc. (doesnt have to be here)
+- change research question to "How can a blockchain-based weather insurance system address the limitations of traditional models" and include it in the thesis

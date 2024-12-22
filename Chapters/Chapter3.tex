@@ -18,7 +18,7 @@ In order to provide the blockchain-based weather insurance, our system must fulf
     \item \textbf{Weather Data Integration} 
     \begin{itemize}
         \item The system must be able to receive and process global weather data from reliable and trusted external sources such as Global Surface Summary of the Day (GSOD) and Global Forecast System (GFS).
-        \item The weather data must be validated using a decentralized mechanism to ensure reliability and prevent single points of failure.
+        \item The weather data must be validated using a decentralized mechanism like oracles to ensure reliability and prevent single points of failure.
     \end{itemize}
     
     \item \textbf{Smart Contract}
@@ -27,11 +27,6 @@ In order to provide the blockchain-based weather insurance, our system must fulf
         \item The smart contract must store the policy terms.
         \item The smart contract must be able to perform eligibility checks on existing policies.
         \item The smart contract must be able to payout funds for policies that have passed eligibility checks.
-    \end{itemize}
-    
-    \item \textbf{Oracle Integration}
-    \begin{itemize}
-        \item The system must use Chainlink oracles to retrieve and verify weather data from GCP datasets.
     \end{itemize}
 \end{itemize}
 
@@ -96,7 +91,7 @@ This interaction requires a digital wallet (for example, MetaMask), which enable
 \subsection{Integration of Chainlink Oracles and the Google Cloud Platform}\label{subsection:ChainlinkOracle}
 Since the weather data from GSOD and GFS, which is accessed through the GCP datasets, is not directly available from the on-chain environment of the smart contract, we need to leverage oracles, which retrieve and verify external data before delivering it to the blockchain.
 
-In our proposed system, Chainlink oracles are used to securely interact with the GCP and pass the data on to the smart contract. The Chainlink oracle network consists of globally distributed nodes. When a request is triggered, multiple nodes independently access GCP and receive the weather data specified in the request. If any nodes return results that differ from the majority, they are flagged as potentially malicious. This decentralized approach ensures that only verified and reliable weather data is passed on to the smart contract.
+In our proposed system, Chainlink oracles are used to securely interact with the GCP and pass the data on to the smart contract. The Chainlink oracle network consists of globally distributed nodes. When a request is triggered, multiple nodes independently access GCP and receive the weather data specified in the request. If any nodes return results that differ from the majority, they are flagged as potentially malicious \autocite{goswami2022towards}. This decentralized approach ensures that only verified and reliable weather data is passed on to the smart contract.
 
 \section{Data Flow}
 In this section, we examine the two primary data flow scenarios central to our blockchain-based weather insurance system: the process of purchasing a weather insurance policy (see \cref{subsection:purchasePolicyFlow}) and the process of triggering a policy payout (see \cref{subsection:policyPayoutTrigger}). These scenarios represent the fundamental interactions between the end user, the smart contract and the external data sources. In the subsequent chapters, we elaborate on the core functionalities utilized in the two scenarios, such as the process of retrieving weather data and calculating the policy conditions.
