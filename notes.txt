@@ -2,7 +2,7 @@ TODOS
 - include more text in Fraud and Manipulation (chapter 1)
 - discuss in the thesis how blockchain-based prototype addresses the problem of systemic risk
 - ask TA if serial commas are necessary
-- either introduce crop and weather index based insurance in later chapters or state in chapter 1 that comparison will be between index based insurance and blockchain based since crop insurance is trash anyway 
+- either introduce crop and weather index based insurance in later chapters or state in chapter 1 that comparison will be between index based insurance and blockchain based since  crop insurance is trash anyway 
 - in later chapters reference more to the key limitations from chapter 1 and not only the objectives in chapter 1
 - optional idea: include reference to references in chapter 2 (Methodology)
 - expand chainlink oracle subsection
