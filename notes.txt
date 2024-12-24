@@ -1,17 +1,13 @@
 TODOS
 - include more text in Fraud and Manipulation (chapter 1)
-- discuss in the thesis how blockchain-based prototype addresses the problem of systemic risk
 - ask TA if serial commas are necessary
 - either introduce crop and weather index based insurance in later chapters or state in chapter 1 that comparison will be between index based insurance and blockchain based since  crop insurance is trash anyway 
-- in later chapters reference more to the key limitations from chapter 1 and not only the objectives in chapter 1
 - optional idea: include reference to references in chapter 2 (Methodology)
 - expand chainlink oracle subsection
 - expand subsection Google Cloud Public Datasets in chapter 2
 - expand requirements in chapter 3, especially technical and non-functional ones
 - make sure analysis mnentions that scability could not be achieved (is in the requirements)
-- include in future work that a system on a scalable blockchain might be better
 - potentially review the Scalability and Global Reach section (Chapter 3)
 - include dApp in requirements?
-- Include somewhere the fact that this thesis chose weather insurance because of simplicity of data retreival and objectiveness of weather data etc. (doesnt have to be here)
-- change research question to "How can a blockchain-based weather insurance system address the limitations of traditional models" and include it in the thesis
-- talk about immutability of code running on smart contract, with updates etc (somewhere in the thesis)
+- Include somewhere the fact that this thesis chose weather insurance because of simplicity of data retreival and objectiveness of weather data etc (e.g. methodology)
+- change research question to "How can a blockchain-based weather insurance system address the limitations of traditional models" and include it in the thesis?

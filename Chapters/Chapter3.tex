@@ -84,7 +84,7 @@ The weather data is provided by Global Surface Summary of the Day (GSOD) and Glo
 This architecture effectively addresses the technical requirements defined in \cref{subsection:technicalRequirements} and ensures compatible and reliable communications between each component.
 
 \subsection{Decentralized App}\label{subsection:decentralizedApp}
-The decentralized application (DApp) allows a non-technical end user to directly interact with the blockchain. Through its interface, a user can request insurance policies, eligibility checks and receive payout funds. Unlike traditional applications, which interact with a centrally managed backend, decentralized applications interact directly with a decentralized blockchain network.
+The decentralized application (dApp) allows a non-technical end user to directly interact with the blockchain. Through its interface, a user can request insurance policies, eligibility checks and receive payout funds. Unlike traditional applications, which interact with a centrally managed backend, decentralized applications interact directly with a decentralized blockchain network \autocite{Wu2019A}.
 
 This interaction requires a digital wallet (for example, MetaMask), which enables the user to initiate and sign a transaction when making a request, such as purchasing an insurance policy. In our architecture, the dApp serves as the primary interface in order for the end-users to interact with the smart contract. 
 
@@ -143,7 +143,7 @@ After the end user has initiated the eligibility check through the use of a dece
 \subsection{Interaction with the Smart Contract}\label{interaction_with_smartcontract}
 As mentioned in \cref{subsection:purchasePolicyFlow} and \cref{subsection:policyPayoutTrigger}, the end user communicates with the smart contract through a decentralized app (see \cref{subsection:decentralizedApp}). The dApp interface is indistinguishable from a regular app interface, with the difference being that it interacts directly with the blockchain instead of a traditional backend. Within the dApp, the end user can create the requests and enter the relevant parameters. Once the user submits a request, the dApp creates a transaction that is signed using the end user's digital wallet. This transaction is then broadcasted to the blockchain, where it can interact directly with the smart contract.
 
-As the focus of this prototype is primarily on the general architecture of a blockchain-based weather insurance solution and its smart contract functionality, we will not dive further into the specifics of decentralized app (dApp) development, since it is not necessary for the subsequent analysis.
+As the focus of this prototype is primarily on the general architecture of a blockchain-based weather insurance solution and its smart contract functionality, we will not dive further into the specifics of decentralized app (dApp) development.
 
 \subsection{Calculating Policy Conditions}
 One of the core functions of the smart contract is calculating the policy conditions. In \cref{fig:purchasePolicyFlow}, it is presented as an internal process of the smart contract. This process involves assessing the parameters provided by the end user in the "Request policy" request (see \cref{tab:flowRequests}) as well as the weather data that the smart contract receives from GCP through the "Request weather data" request (see \cref{tab:flowRequests}).
@@ -180,12 +180,12 @@ This section explores the practical applications and broader implications of the
 The following subsections outline three potential real-world applications for our proposed system, presenting how our system's advantages can be effectively leveraged to address specific challenges in each use-case.
 
 \subsubsection{Disaster Relief Efforts}\label{disaster_relief}
-Certain regions and countries are particularly vulnerable to extreme weather events and catastrophes, such as floods, hurricanes or droughts. As described in Chapter 1 (see \cref{section:background}), these disasters can result in significant loss of life and extensive financial damage. Relief efforts for such catastrophes are often concentrated in specific areas and rely heavily on government and aid organization support.
+Certain regions and countries are particularly vulnerable to extreme weather events and catastrophes, such as floods, hurricanes or droughts. As described in Chapter 1 (see \cref{section:background}), these disasters can result in significant loss of life and extensive financial damage. Relief efforts for such catastrophes are often concentrated in specific areas and rely heavily on government and aid organization support \autocite{Fitch-Fleischmann2021Story}.
 
 By offering transparent weather insurance to governments and humanitarian organizations, the financial burden of disaster relief can be better managed and distributed. As these organizations and governments are often funded through taxpayer money, the proposed application ensures that payouts are automated and verifiable to the general public through blockchain technology, enhancing transparency, trust and accountability in the use of such funds.
 
 \subsubsection{Tourism Industry}\label{tourism_industry}
-The tourism industry can be very sensitive to weather conditions, particularly in regions prone to extreme or unexpected weather events, such as heavy rainfall, storms or prolonged droughts. A traveler visiting a region with a high risk of heavy rainfall might want to complete short-term insurance to protect their trip costs in case of such a weather event.
+The tourism industry can be very sensitive to weather conditions, particularly in regions prone to extreme or unexpected weather events, such as heavy rainfall, storms or prolonged droughts. A traveler visiting a region with a high risk of heavy rainfall might want to complete short-term insurance to protect their trip costs in case of such a weather event \autocite{Wilkins2018Effects}.
 
 In this application, the system's ability to complete quick policy insurance and automated payouts ensures that the customer can obtain weather insurance on short notice without much bureaucracy involved. This makes the system suitable for spontaneous decisions, which are very common in the tourism sector. Unlike the disaster relief application \cref{disaster_relief}, which focuses on large-scale policies for a few large policyholders, this application is tailored to a smaller-scale, high-volume model.
 
