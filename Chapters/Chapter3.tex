@@ -1,9 +1,7 @@
 \chapter{Development of the Prototype}\label{chapter:development_prototype}
 This chapter outlines the development of a blockchain-based weather insurance prototype with a focus on the design, architecture and functionality. First, we present the necessary requirements for the system, which include functional, non-functional and technical aspects. Later, the architecture of the proposed system is introduced, which provide an overview of the key components of the system, including smart contracts, Chainlink oracles and Google Cloud Public Datasets.
 
-The data flow section describes how the different components of the system work together to enable purchasing policies, executing eligibility checks and paying out claims. Finally, real-world applications of the system are explored, which demonstrate how the prototype can address specific challenges across diverse sectors and industries, such as disaster relief, tourism and renewable energy.
-
-The chapter establishes the foundation for evaluating the proposed solution, highlighting its potential and limitations in terms of transparency, efficiency and trust compared to traditional insurance systems.
+In \cref{services} it is described how the different components of the system work together to enable purchasing policies, executing eligibility checks and paying out claims. Finally, real-world applications of the system are explored, which demonstrate how the prototype can address specific challenges across diverse sectors and industries, such as disaster relief, tourism and renewable energy.
 
 \section{Requirements}\label{section:requirements}
 In order to provide the blockchain-based weather insurance, our system must fulfill several key requirements. In this section we describe each category of requirements in a dedicated subsection. These requirements are derived from the objectives outlined in \cref{section:objectives} and are designed to address the limitations of traditional models described in \cref{section:key_limitations_existing_insurance}.
@@ -12,13 +10,14 @@ In order to provide the blockchain-based weather insurance, our system must fulf
 \begin{itemize}
     \item \textbf{User Interaction}
     \begin{itemize}
-        \item The system must provide a user interface for purchasing policies and triggering payout eligibility checks. 
+        \item The system must provide a user interface for purchasing policies and triggering payout eligibility checks.
+        \item The user interface must be able to directly communicate with the smart contract.
     \end{itemize}
 
     \item \textbf{Weather Data Integration} 
     \begin{itemize}
-        \item The system must be able to receive and process global weather data from reliable and trusted external sources such as Global Surface Summary of the Day (GSOD) and Global Forecast System (GFS).
-        \item The weather data must be validated using a decentralized mechanism like oracles to ensure reliability and prevent single points of failure.
+        \item The system must be able to receive and process global weather data from reliable and trusted external sources such as the Global Surface Summary of the Day (GSOD) and the Global Forecast System (GFS).
+        \item The weather data must be validated using a decentralized mechanism such as oracles to ensure reliability and prevent single points of failure.
     \end{itemize}
     
     \item \textbf{Smart Contract}
@@ -35,16 +34,21 @@ In order to provide the blockchain-based weather insurance, our system must fulf
     \item \textbf{Security}
     \begin{itemize}
         \item All the bilateral interactions between the smart contract, Chainlink oracles, GCP and the end user must be secure.
+        \item The system must be able to authenticate and authorize users through their associated digital wallets during operations.
     \end{itemize}
     
     \item \textbf{Scalability}
     \begin{itemize}
         \item The system must be able to scale to handle large amounts of policies and end users.
+        \item The system must be able to maintain performance and low latency as the number of policies grows.
+        \item The system must be able to prevent high gas costs during periods of high transaction throughput.
     \end{itemize}
     
     \item \textbf{Transparency}
     \begin{itemize}
-        \item All transactions and insurance claims must be recorded on the blockchain for transparency purposes.
+        \item All transactions and insurance claims must be recorded on the blockchain.
+        \item Users must be able to access a history of all transactions with the system.
+        \item Policies and payouts must be verifiable by all users.
     \end{itemize}
 \end{enumerate}
 
@@ -52,17 +56,23 @@ In order to provide the blockchain-based weather insurance, our system must fulf
 \begin{enumerate}
     \item \textbf{Blockchain Platform}
     \begin{itemize}
+        \item The platform should provide high availability and redundancy to ensure uninterrupted operations.
         \item The smart contract must be deployed on the Ethereum blockchain.
     \end{itemize}
     
     \item \textbf{Data Retrieval}
     \begin{itemize}
         \item The system must be able to retrieve weather data from GCP.
+        \item The data must be fetched with precise location and time-specific parameters.  
+        \item The integrity of the data must be verified to prevent the use of corrupted or incomplete weather data. 
+        \item The data retrieval must happen in a decentralized manner.
     \end{itemize}
     
     \item \textbf{Chainlink Oracle}
     \begin{itemize}
         \item The system must integrate with a Chainlink node to facilitate data retrieval from GCP.
+        \item The Chainlink nodes must validate the data before transmitting it to the smart contract. 
+        \item The oracle network must be able to handle inconsistencies in the received data.
     \end{itemize}
 \end{enumerate}
 
@@ -88,13 +98,13 @@ The decentralized application (dApp) allows a non-technical end user to directly
 
 This interaction requires a digital wallet (for example, MetaMask), which enables the user to initiate and sign a transaction when making a request, such as purchasing an insurance policy. In our architecture, the dApp serves as the primary interface in order for the end-users to interact with the smart contract. 
 
-\subsection{Integration of Chainlink Oracles and the Google Cloud Platform}\label{subsection:ChainlinkOracle}
+\subsection{Backend service nodes}\label{subsection:ChainlinkOracle}
 Since the weather data from GSOD and GFS, which is accessed through the GCP datasets, is not directly available from the on-chain environment of the smart contract, we need to leverage oracles, which retrieve and verify external data before delivering it to the blockchain.
 
 In our proposed system, Chainlink oracles are used to securely interact with the GCP and pass the data on to the smart contract. The Chainlink oracle network consists of globally distributed nodes. When a request is triggered, multiple nodes independently access GCP and receive the weather data specified in the request. If any nodes return results that differ from the majority, they are flagged as potentially malicious \autocite{breidenbach2021chainlink}. This decentralized approach ensures that only verified and reliable weather data is passed on to the smart contract.
 
-\section{Data Flow}
-In this section, we examine the two primary data flow scenarios central to our blockchain-based weather insurance system: the process of purchasing a weather insurance policy (see \cref{subsection:purchasePolicyFlow}) and the process of triggering a policy payout (see \cref{subsection:policyPayoutTrigger}). These scenarios represent the fundamental interactions between the end user, the smart contract and the external data sources. In the subsequent chapters, we elaborate on the core functionalities utilized in the two scenarios, such as the process of retrieving weather data and calculating the policy conditions.
+\section{Services}\label{services}
+In this section, we examine the two primary services central to our blockchain-based weather insurance system: the process of purchasing a weather insurance policy (see \cref{subsection:purchasePolicyFlow}) and the process of triggering a policy payout (see \cref{subsection:policyPayoutTrigger}). These scenarios represent the fundamental interactions between the end user, the smart contract and the external data sources. In the subsequent chapters, we elaborate on the core functionalities utilized in the two scenarios, such as the process of retrieving weather data and calculating the policy conditions.
 
 \subsection{Purchase Weather Insurance Policy}\label{subsection:purchasePolicyFlow}
 The sequence diagram in \cref{fig:purchasePolicyFlow} outlines the steps involved in purchasing a weather insurance policy in our proposed system. The main components are the end user, the smart contract, Chainlink oracles and the Google Cloud Platform (GCP). Each of these components plays a central role in enabling the policy purchase and the associated data retrieval and validation processes. Each request between components includes a set of parameters. These parameters contain the necessary information that each component needs in order to perform its role and functions accurately. For example, in a purchase policy request, parameters such as location, coverage duration and type of coverage are sent to the smart contract. Table \cref{tab:flowRequests} contains all requests with their respective parameters.
@@ -120,7 +130,7 @@ The smart contract then fetches the necessary weather data needed for the calcul
 Note that in the diagram there are two "Request weather data" requests depicted. One is from the smart contract to the Chainlink oracle and one from the Chainlink oracle to the GCP. Even though these requests differ in their technical details (such as type of request and authorization headers), we have combined them in \cref{tab:flowRequests} as one entry. This was chosen specifically for simplicity purposes, since the diagram is an abstraction of a policy purchase process and leaves space for flexibility in technical implementation.
 
 \subsection{Trigger Policy Payout}\label{subsection:policyPayoutTrigger}
-The second data flow is shown in \cref{fig:payoutFlow}. It presents the process of triggering a policy payout. This payout happens when the specified policy conditions from \cref{subsection:purchasePolicyFlow} are fulfilled (assuming a policy has been agreed upon between the end user and the smart contract beforehand).
+The second service is shown in \cref{fig:payoutFlow}. It presents the process of triggering a policy payout. This payout happens when the specified policy conditions from \cref{subsection:purchasePolicyFlow} are fulfilled (assuming a policy has been agreed upon between the end user and the smart contract beforehand).
 
 A key decision in the design of the payout process is determining what triggers an eligibility check and the following payout process. A possible solution would be to use scheduled tasks that periodically trigger an eligibility request on every policy held by the smart contract. Since the Ethereum blockchain does not support scheduled or automated tasks natively, such functionality would require an external solution. For example, Chainlink offers an automation service \autocite{chainlink_automation} with which it would be possible to trigger a scheduled eligibility check on the smart contract (for example, once a day). This service would, however, cost gas, which has to be paid by the smart contract and would result in a lot of unnecessary transactions. In our proposed solution, the end user initiates the eligibility check instead. This decision prioritizes simplicity and cost-efficiency, avoiding unnecessary transactions that would otherwise increase the policy premium for the end user.
 
@@ -195,13 +205,3 @@ Renewable energy projects, such as wind farms, solar parks and hydroelectric pla
 The proposed blockchain-based weather insurance system offers a practical solution to mitigate these risks. Through automated payouts when predefined conditions are met, such as insufficient wind speeds or weak sunlight, the system provides project operators with quick financial compensation.
 
 Similar to the disaster relief efforts application \cref{disaster_relief}, large energy projects are often funded by governments. The transparent nature of our blockchain-based system allows the general public to oversee how funds are allocated, used and distributed. This enhances accountability, builds public trust and ensures the funds are managed efficiently and fairly.
-
-\subsection{Scalability and Global Reach}\label{scalability_global_reach}
-Unlike traditional insurance systems, which often face bottlenecks due to their reliance on centrally managed infrastructure, the proposed blockchain-based system leverages decentralized technology to simplify policy management, claims processing and payouts. However, achieving wide-range scalability remains a significant challenge. The system's reliance on the Ethereum blockchain introduces limitations due to throughput problems and high gas fees, as mentioned in Chapter 1 (see \cref{technical_challenges_chapter1}). These issues can result in delays and increased costs, particularly as the number of users and transactions grows. While decentralized networks like Chainlink and widely available datasets from GCP offer global applicability, the combination of technical and economic constraints of the Ethereum blockchain limits the efficient scaling of the system to accommodate a large user base across different regions and jurisdictions.
-
-\subsection{Regulatory Barriers of the Prototype}
-The regulatory challenges presented in Chapter 1 (see \cref{regulatory_challenges_chapter1}) significantly affect the feasibility of implementing the blockchain-based weather insurance prototype. The lack of universal legal recognition for smart contracts creates uncertainty, especially for applications such as disaster relief and renewable energy, where automated payouts rely on enforceable agreements. If smart contracts are not legally binding, their ability to reduce bureaucracy and ensure efficient operations is greatly diminished if not eliminated.
-
-Compliance with consumer protection and data privacy regulations also poses challenges. Automated transactions may conflict with local laws if users are unable to contest or reverse them. This is particularly problematic in consumer-facing applications like tourism insurance, where disputes over denied payouts can erode trust. Furthermore, the immutable nature of blockchain data storage may conflict with privacy laws, such as the GDPR's "right to be forgotten", limiting the system's applicability in regions with strict data regulations.
-
-Cross-border transactions further complicate the system's scalability. The decentralized architecture relies on interoperability across jurisdictions, each with diffrent requirements for taxation, anti-money laundering (AML) policies and know-your-customer (KYC) compliance. These regulatory differences can introduce inefficiencies and operational complexities, impacting the system's core advantages of transparency, efficiency and trust. Interoperability across borders is also essential for addressing systemic risk described in \cref{systemic_risk}. Without seamless operations, bureaucratic processes across different jurisdictions could reduce the system's perceived efficiency, which limits its ability to scale globally. Coupled with the technical scalability challenges discussed in \cref{scalability_global_reach}, these regulatory barriers further diminish the feasibility of developing a global and scalable solution.
