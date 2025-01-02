@@ -1,9 +1,2 @@
 TODOS
-- either introduce crop and weather index based insurance in later chapters or state in chapter 1 that comparison will be between index based insurance and blockchain based since  crop insurance is trash anyway 
-- make sure analysis mnentions that scability could not be achieved (is in the requirements)
-- potentially review the Scalability and Global Reach section (Chapter 3)
-- include dApp in requirements?
-- Include somewhere the fact that this thesis chose weather insurance because of simplicity of data retreival and objectiveness of weather data etc (e.g. methodology)
-- change research question to "How can a blockchain-based weather insurance system address the limitations of traditional models" and include it in the thesis?
-- provide tables in application scenarios
-- go through thesis and watch for awkward linebreaks etc
+- provide tables in application scenarios?
